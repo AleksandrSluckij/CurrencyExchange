@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.skillbox.currency.exchange.dto.AllCurrenciesDto;
 import ru.skillbox.currency.exchange.dto.CurrencyDto;
+import ru.skillbox.currency.exchange.exception.IdNotExistException;
 import ru.skillbox.currency.exchange.service.CurrencyService;
 
 @RestController
@@ -14,7 +15,7 @@ public class CurrencyController {
     private final CurrencyService service;
 
     @GetMapping(value = "/{id}")
-    ResponseEntity<CurrencyDto> getById(@PathVariable("id") Long id) {
+    ResponseEntity<CurrencyDto> getById(@PathVariable("id") Long id) throws IdNotExistException {
         return ResponseEntity.ok(service.getById(id));
     }
 
@@ -32,4 +33,5 @@ public class CurrencyController {
     ResponseEntity<AllCurrenciesDto> getAllInfo() {
         return ResponseEntity.ok(service.getAllInfo());
     }
+
 }

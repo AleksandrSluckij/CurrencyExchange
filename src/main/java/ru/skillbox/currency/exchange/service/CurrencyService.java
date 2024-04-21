@@ -7,6 +7,7 @@ import ru.skillbox.currency.exchange.dto.AllCurrenciesDto;
 import ru.skillbox.currency.exchange.dto.CurrencyDto;
 import ru.skillbox.currency.exchange.dto.ShortCurrencyDto;
 import ru.skillbox.currency.exchange.entity.Currency;
+import ru.skillbox.currency.exchange.exception.IdNotExistException;
 import ru.skillbox.currency.exchange.mapper.CurrencyMapper;
 import ru.skillbox.currency.exchange.repository.CurrencyRepository;
 
@@ -19,9 +20,9 @@ public class CurrencyService {
     private final CurrencyMapper mapper;
     private final CurrencyRepository repository;
 
-    public CurrencyDto getById(Long id) {
+    public CurrencyDto getById(Long id) throws IdNotExistException {
         log.info("CurrencyService method getById executed");
-        Currency currency = repository.findById(id).orElseThrow(() -> new RuntimeException("Currency not found with id: " + id));
+        Currency currency = repository.findById(id).orElseThrow(() -> new IdNotExistException("Currency not found with id: " + id));
         return mapper.convertToDto(currency);
     }
 
@@ -40,4 +41,5 @@ public class CurrencyService {
         Object[] allCurrencies = repository.findAll().stream().map(mapper::convertToShortDto).toArray();
         return new AllCurrenciesDto(Arrays.copyOf(allCurrencies, allCurrencies.length, ShortCurrencyDto[].class));
     }
+
 }
