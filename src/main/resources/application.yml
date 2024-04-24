@@ -23,29 +23,17 @@ spring:
 
 cbr_currency_market_url:  https://cbr.ru/scripts/XML_daily.asp
 
-#logging:
-#  level:
-#    root: INFO
-#    com.example.package: INFO
-#  file:
-#    name: log/log.log
-#    totalSizeCap: 10MB
-#    historySize: 20MB
-#  appender:
-#    console:
-#      enabled: false
-#    file:
-#      enabled: true
-#  appenders:
-#    file:
-#      type: FILE
-#      markerFilter:
-#        marker: CBR_RESPONSE_ERROR
-#        level: INFO
-#      encoder:
-#        pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{35} - %msg%n"
-#      rollingPolicy:
-#        type: SizeAndTimeBasedRollingPolicy
-#        fileNamePattern: "${logging.file.name}.%d{yyyy-MM-dd}.%i"
-#        maxFileSize: 10MB
-#        maxHistory: 30
+get_cbr_info_delay_millis: 150_000
+
+logging:
+  file:
+    name: log/log.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n"
+  level:
+    ru.skillbox.currency: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
+    org.apache: WARN
+    com.zaxxer: WARN
+

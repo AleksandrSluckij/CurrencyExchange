@@ -30,7 +30,7 @@ public class CurrenciesBaseUpdating {
     String cbrUrl;
 
 
-    @Scheduled(fixedDelay = 240000, initialDelay = 5000)
+    @Scheduled(fixedDelayString = "${get_cbr_info_delay_millis}", initialDelay = 5000)
     public void updateInfoCbr () {
         log.info("---Retrieving info from CBR site!---");
         URL cbrInfoUrl = getUrl(cbrUrl);
