@@ -38,7 +38,9 @@ public class CurrencyService {
     }
 
     public AllCurrenciesDto getAllInfo() {
-        Object[] allCurrencies = repository.findAll().stream().map(mapper::convertToShortDto).toArray();
+        Object[] allCurrencies = repository.findAll().stream()
+                .map(mapper::convertToShortDto)
+                .toArray();
         return new AllCurrenciesDto(Arrays.copyOf(allCurrencies, allCurrencies.length, ShortCurrencyDto[].class));
     }
 
